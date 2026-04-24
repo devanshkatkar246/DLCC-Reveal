@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-const SoundContext = createContext({ play: () => {} });
+const SoundContext = createContext({ play: () => { } });
 
 const envelope = (context, gainNode, startTime, peak = 0.035, attack = 0.015, release = 0.16) => {
   gainNode.gain.setValueAtTime(0.0001, startTime);
@@ -65,56 +65,56 @@ const noiseBurst = (context, destination, { time, peak = 0.012, duration = 0.14,
 
 const patternMap = {
   heroTyping: (context, destination, time) => {
-    tone(context, destination, { time, frequency: 1220, type: 'square', peak: 0.025, attack: 0.005, release: 0.04 });
-    tone(context, destination, { time: time + 0.018, frequency: 910, type: 'triangle', peak: 0.015, attack: 0.004, release: 0.05 });
+    tone(context, destination, { time, frequency: 1220, type: 'square', peak: 0.4, attack: 0.005, release: 0.04 });
+    tone(context, destination, { time: time + 0.018, frequency: 910, type: 'triangle', peak: 0.25, attack: 0.004, release: 0.05 });
   },
   systemBoot: (context, destination, time) => {
-    sweep(context, destination, { time, from: 180, to: 360, duration: 0.2, peak: 0.035 });
-    tone(context, destination, { time: time + 0.08, frequency: 540, type: 'sine', peak: 0.02, attack: 0.02, release: 0.18 });
+    sweep(context, destination, { time, from: 180, to: 360, duration: 0.2, peak: 0.5 });
+    tone(context, destination, { time: time + 0.08, frequency: 540, type: 'sine', peak: 0.4, attack: 0.02, release: 0.18 });
   },
   accessGranted: (context, destination, time) => {
-    tone(context, destination, { time, frequency: 620, type: 'sine', peak: 0.035, attack: 0.02, release: 0.12 });
-    tone(context, destination, { time: time + 0.1, frequency: 930, type: 'sine', peak: 0.03, attack: 0.02, release: 0.18 });
+    tone(context, destination, { time, frequency: 620, type: 'sine', peak: 0.6, attack: 0.02, release: 0.12 });
+    tone(context, destination, { time: time + 0.1, frequency: 930, type: 'sine', peak: 0.5, attack: 0.02, release: 0.18 });
   },
   buttonHover: (context, destination, time) => {
-    tone(context, destination, { time, frequency: 820, type: 'triangle', peak: 0.018, attack: 0.01, release: 0.06 });
+    tone(context, destination, { time, frequency: 820, type: 'triangle', peak: 0.35, attack: 0.01, release: 0.06 });
   },
   buttonClick: (context, destination, time) => {
-    tone(context, destination, { time, frequency: 320, type: 'sine', peak: 0.028, attack: 0.01, release: 0.08 });
-    tone(context, destination, { time: time + 0.06, frequency: 540, type: 'triangle', peak: 0.024, attack: 0.01, release: 0.1 });
+    tone(context, destination, { time, frequency: 320, type: 'sine', peak: 0.6, attack: 0.01, release: 0.08 });
+    tone(context, destination, { time: time + 0.06, frequency: 540, type: 'triangle', peak: 0.5, attack: 0.01, release: 0.1 });
   },
   authorize: (context, destination, time) => {
-    sweep(context, destination, { time, from: 420, to: 980, duration: 0.28, peak: 0.035, type: 'sawtooth' });
+    sweep(context, destination, { time, from: 420, to: 980, duration: 0.28, peak: 0.5, type: 'sawtooth' });
   },
   glitch: (context, destination, time) => {
-    noiseBurst(context, destination, { time, peak: 0.022, duration: 0.08, lowpass: 1900 });
-    tone(context, destination, { time: time + 0.02, frequency: 160, type: 'square', peak: 0.016, attack: 0.003, release: 0.04 });
+    noiseBurst(context, destination, { time, peak: 0.45, duration: 0.08, lowpass: 1900 });
+    tone(context, destination, { time: time + 0.02, frequency: 160, type: 'square', peak: 0.35, attack: 0.003, release: 0.04 });
   },
   scan: (context, destination, time) => {
-    sweep(context, destination, { time, from: 240, to: 1240, duration: 0.32, peak: 0.025 });
+    sweep(context, destination, { time, from: 240, to: 1240, duration: 0.32, peak: 0.45 });
   },
   unlock: (context, destination, time) => {
-    tone(context, destination, { time, frequency: 480, type: 'triangle', peak: 0.025, attack: 0.01, release: 0.08 });
-    tone(context, destination, { time: time + 0.08, frequency: 760, type: 'triangle', peak: 0.022, attack: 0.01, release: 0.1 });
+    tone(context, destination, { time, frequency: 480, type: 'triangle', peak: 0.5, attack: 0.01, release: 0.08 });
+    tone(context, destination, { time: time + 0.08, frequency: 760, type: 'triangle', peak: 0.4, attack: 0.01, release: 0.1 });
   },
   cardHover: (context, destination, time) => {
-    tone(context, destination, { time, frequency: 1040, type: 'sine', peak: 0.015, attack: 0.005, release: 0.05 });
+    tone(context, destination, { time, frequency: 1040, type: 'sine', peak: 0.3, attack: 0.005, release: 0.05 });
   },
   cardOpen: (context, destination, time) => {
-    sweep(context, destination, { time, from: 280, to: 620, duration: 0.14, peak: 0.028 });
-    tone(context, destination, { time: time + 0.11, frequency: 720, type: 'sine', peak: 0.025, attack: 0.01, release: 0.12 });
+    sweep(context, destination, { time, from: 280, to: 620, duration: 0.14, peak: 0.55 });
+    tone(context, destination, { time: time + 0.11, frequency: 720, type: 'sine', peak: 0.45, attack: 0.01, release: 0.12 });
   },
   panelOpen: (context, destination, time) => {
-    tone(context, destination, { time, frequency: 300, type: 'triangle', peak: 0.028, attack: 0.015, release: 0.12 });
-    tone(context, destination, { time: time + 0.08, frequency: 580, type: 'triangle', peak: 0.022, attack: 0.015, release: 0.14 });
+    tone(context, destination, { time, frequency: 300, type: 'triangle', peak: 0.5, attack: 0.015, release: 0.12 });
+    tone(context, destination, { time: time + 0.08, frequency: 580, type: 'triangle', peak: 0.4, attack: 0.015, release: 0.14 });
   },
   panelClose: (context, destination, time) => {
-    tone(context, destination, { time, frequency: 520, type: 'triangle', peak: 0.02, attack: 0.01, release: 0.08 });
-    tone(context, destination, { time: time + 0.05, frequency: 320, type: 'sine', peak: 0.018, attack: 0.01, release: 0.09 });
+    tone(context, destination, { time, frequency: 520, type: 'triangle', peak: 0.45, attack: 0.01, release: 0.08 });
+    tone(context, destination, { time: time + 0.05, frequency: 320, type: 'sine', peak: 0.35, attack: 0.01, release: 0.09 });
   },
   mystery: (context, destination, time) => {
-    tone(context, destination, { time, frequency: 220, type: 'sine', peak: 0.012, attack: 0.06, release: 0.32 });
-    tone(context, destination, { time: time + 0.12, frequency: 330, type: 'triangle', peak: 0.01, attack: 0.06, release: 0.34 });
+    tone(context, destination, { time, frequency: 220, type: 'sine', peak: 0.25, attack: 0.06, release: 0.32 });
+    tone(context, destination, { time: time + 0.12, frequency: 330, type: 'triangle', peak: 0.2, attack: 0.06, release: 0.34 });
   },
 };
 
@@ -133,7 +133,7 @@ export const SoundProvider = ({ children }) => {
         if (!AudioContextClass) return;
         const context = new AudioContextClass();
         const gain = context.createGain();
-        gain.gain.value = 0.65;
+        gain.gain.value = 1.0;
         gain.connect(context.destination);
         contextRef.current = context;
         masterGainRef.current = gain;
