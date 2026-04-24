@@ -326,7 +326,7 @@ export const teamData = [
         dept: "Sponsorship",
         title: "Sponsorship Lead, Strategic Partnerships",
         skills: ["Pitching", "Negotiation", "Partnership Development"],
-        image: null,
+        image: "/Ajay Dangi.jpeg",
         position: "center",
         intro: "Drives sponsorship conversations with a focus on positioning, value articulation, and partnership growth.",
         strengths: ["Pitch confidence", "Negotiation mindset", "Partnership thinking"],
