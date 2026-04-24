@@ -1,87 +1,140 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Gavel, Zap, ShieldAlert } from 'lucide-react';
+import { LockKeyhole, Radar, ShieldAlert, TimerReset } from 'lucide-react';
+import { useSound } from '../sound/SoundProvider';
 
-const timeline = [
-  { round: "Round 1", title: "Blind Coding", icon: <Code />, desc: "Monitors off. Pure logic and syntax mastery." },
-  { round: "Round 2", title: "Auction War", icon: <Gavel />, desc: "Bid on problem statements using virtual currency." },
-  { round: "Round 3", title: "Optimization Battle", icon: <Zap />, desc: "Refactor. Reduce time complexity. Survive." },
-  { round: "Final", title: "Showdown", icon: <ShieldAlert />, desc: "The ultimate face-off for the championship title." }
+const signals = [
+  {
+    label: 'SOMETHING BIG',
+    value: 'IS COMING SOON',
+    icon: <LockKeyhole size={18} />,
+  },
+  {
+    label: 'Signal Type',
+    value: 'SIGNATURE EVENT',
+    icon: <Radar size={18} />,
+  },
+  {
+    label: 'Audience',
+    value: 'THINKERS / STRATEGISTS / COMPETITORS',
+    icon: <ShieldAlert size={18} />,
+  },
+  {
+    label: 'Reveal State',
+    value: 'COMING SOON',
+    icon: <TimerReset size={18} />,
+  },
 ];
 
 const FlagshipEvent = () => {
+  const { play } = useSound();
+
   return (
-    <section className="py-32 bg-[#050505] relative z-20 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyber-green/10 via-transparent to-transparent pointer-events-none"></div>
+    <section className="relative z-20 overflow-hidden bg-[#040404] py-32">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,255,65,0.14),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(0,255,65,0.08),transparent_24%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,65,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,65,0.02)_1px,transparent_1px)] bg-[size:56px_56px] pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
-          
-          {/* Left: Info */}
-          <div className="lg:w-1/2 space-y-8">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="inline-block px-4 py-1 bg-cyber-green/10 border border-cyber-green text-cyber-green font-mono text-sm uppercase tracking-widest mb-4"
-            >
-              Signature Protocol
-            </motion.div>
-            
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-5xl md:text-7xl font-black text-white leading-tight"
-            >
-              DSA <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-green to-emerald-400">AUCTION</span>
-            </motion.h2>
+      <div className="container relative z-10 mx-auto px-6">
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            onMouseEnter={() => play('mystery', 400)}
+            className="relative overflow-hidden rounded-[24px] border border-cyber-green/22 bg-[linear-gradient(140deg,rgba(0,255,65,0.08),rgba(0,0,0,0.94)_28%,rgba(0,255,65,0.03))] p-6 shadow-[0_0_55px_rgba(0,255,65,0.1)] sm:rounded-[30px] sm:p-8 md:p-10"
+          >
+            <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,255,65,0.04)_50%)] bg-[length:100%_5px] opacity-30 pointer-events-none" />
+            <div className="absolute left-6 right-6 top-0 h-px bg-gradient-to-r from-transparent via-cyber-green/85 to-transparent" />
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="space-y-4 text-xl md:text-2xl font-medium text-gray-300"
-            >
-              <p>Teams compete using logic, coding, and strategy.</p>
-              <p className="text-white font-mono bg-black/50 p-4 border-l-4 border-cyber-green">
-                <span className="text-red-500">No internet.</span><br/>
-                <span className="text-red-500">No shortcuts.</span><br/>
-                <span className="text-cyber-green neon-text">Only skill.</span>
-              </p>
-            </motion.div>
-          </div>
+            <div className="relative z-10">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyber-green/25 bg-cyber-green/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.34em] text-cyber-green">
+                Signature Protocol Incoming
+              </div>
 
-          {/* Right: Timeline */}
-          <div className="lg:w-1/2 w-full">
-            <div className="space-y-6 relative before:absolute before:inset-0 before:ml-8 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-cyber-green before:to-transparent">
-              
-              {timeline.map((item, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.2 }}
-                  className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
-                >
-                  <div className="flex items-center justify-center w-16 h-16 rounded-full border-2 border-cyber-green bg-black text-cyber-green shadow-[0_0_15px_rgba(0,255,65,0.2)] group-hover:shadow-[0_0_25px_rgba(0,255,65,0.6)] group-hover:bg-cyber-green group-hover:text-black transition-all duration-300 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 ml-0 md:ml-0">
-                    {item.icon}
+              <motion.h2
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-7xl"
+              >
+                SOMETHING BIG <span className="glitch text-cyber-green" data-text="IS COMING">IS COMING</span>
+              </motion.h2>
+
+              <div className="mt-8 space-y-4 text-base leading-relaxed text-gray-300 sm:text-lg md:text-xl">
+                <p>We are preparing something bigger.</p>
+                <p>Not just another event. Not just another competition.</p>
+                <p>
+                  A challenge built for thinkers. For strategists. For those who compete to win.
+                </p>
+                <p className="font-mono uppercase tracking-[0.25em] text-cyber-green/85">
+                  Access will be revealed soon.
+                </p>
+              </div>
+
+              <div className="mt-10 grid gap-3 sm:grid-cols-2">
+                {signals.map((signal) => (
+                  <div
+                    key={signal.label}
+                    className="rounded-2xl border border-cyber-green/15 bg-black/35 px-4 py-4 backdrop-blur-md"
+                  >
+                    <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.32em] text-cyber-green/60">
+                      {signal.icon}
+                      {signal.label}
+                    </div>
+                    <p className="text-sm font-semibold tracking-[0.18em] text-white">{signal.value}</p>
                   </div>
-                  
-                  <div className="w-[calc(100%-5rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-lg glass-card text-left md:group-odd:text-right ml-4 md:ml-0 md:group-odd:pr-8 md:group-even:pl-8 transition-transform duration-300 group-hover:-translate-y-1">
-                    <h4 className="text-cyber-green font-mono text-sm uppercase mb-1">{item.round}</h4>
-                    <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-
+                ))}
+              </div>
             </div>
-          </div>
+          </motion.div>
 
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            onMouseEnter={() => play('mystery', 400)}
+            className="relative overflow-hidden rounded-[24px] border border-cyber-green/18 bg-black/50 p-6 shadow-[0_0_55px_rgba(0,255,65,0.08)] sm:rounded-[30px] sm:p-8"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,65,0.12),transparent_52%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,255,65,0.05)_50%)] bg-[length:100%_4px] opacity-25 pointer-events-none" />
+
+            <div className="relative z-10">
+              <div className="mb-4 font-mono text-[11px] uppercase tracking-[0.34em] text-cyber-green/65">
+                Terminal Suspense Feed
+              </div>
+
+              <div className="space-y-4 font-mono text-sm text-cyber-green/90">
+                <div className="rounded-xl border border-cyber-green/14 bg-[#031106]/85 px-4 py-4">
+                  <p>{'>'} Incoming signal detected...</p>
+                </div>
+                <div className="rounded-xl border border-cyber-green/14 bg-[#031106]/85 px-4 py-4">
+                  <p>{'>'} Event signature masked behind classified protocol.</p>
+                </div>
+                <div className="rounded-xl border border-cyber-green/14 bg-[#031106]/85 px-4 py-4">
+                  <p>{'>'} Clearance release pending official unlock.</p>
+                </div>
+              </div>
+
+              <div className="mt-10 rounded-[24px] border border-cyber-green/18 bg-[linear-gradient(135deg,rgba(0,255,65,0.12),rgba(0,0,0,0.9))] p-6">
+                <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-cyber-green/60">
+                  Coming Soon
+                </p>
+                <p className="mt-3 text-3xl font-black uppercase tracking-[0.22em] text-white md:text-4xl">
+                  Hidden Reveal
+                </p>
+                <div className="mt-5 h-2 w-full overflow-hidden rounded-full bg-cyber-green/10">
+                  <motion.div
+                    className="h-full rounded-full bg-gradient-to-r from-cyber-green/30 via-cyber-green to-cyber-green/30"
+                    animate={{ x: ['-35%', '100%'] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: 'linear' }}
+                    style={{ width: '35%' }}
+                  />
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

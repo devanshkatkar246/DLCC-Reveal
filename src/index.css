@@ -11,6 +11,10 @@
 
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-cyber-dark text-cyber-light font-sans antialiased overflow-x-hidden;
     cursor: crosshair;
@@ -88,6 +92,84 @@
 .glass-card:hover {
   border-color: rgba(0, 255, 65, 0.8);
   box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+}
+
+.crt-overlay {
+  background-image:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 255, 65, 0.05) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 65, 0.02), rgba(0, 0, 255, 0.03));
+  background-size: 100% 4px, 6px 100%;
+}
+
+@keyframes trace-line {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes trace-line-reverse {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-grid {
+  0%, 100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes ghost-flicker {
+  0%, 100% {
+    opacity: 0.85;
+  }
+  8% {
+    opacity: 0.55;
+  }
+  12% {
+    opacity: 0.92;
+  }
+  16% {
+    opacity: 0.5;
+  }
+  20% {
+    opacity: 0.88;
+  }
+}
+
+.animate-trace-line {
+  animation: trace-line 2.2s linear infinite;
+}
+
+.animate-trace-line-reverse {
+  animation: trace-line-reverse 2.8s linear infinite;
+}
+
+.animate-pulse-grid {
+  animation: pulse-grid 2.8s ease-in-out infinite;
+}
+
+.animate-ghost-flicker {
+  animation: ghost-flicker 2.6s steps(1) infinite;
 }
 
 /* Custom Scrollbar */
